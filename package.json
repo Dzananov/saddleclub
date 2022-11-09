@@ -44,5 +44,11 @@
   },
   "devDependencies": {
     "msw": "^0.35.0"
+  },
+  "engines":{
+    "node":"16.18.0",
+    "npm":"8.19.2"
   }
 }
+
+
