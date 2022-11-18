@@ -29,7 +29,7 @@ const NavBar = () => {
   );
 /*Logged in state*/
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar className={styles.NavBar} expand="md" fixed="top" bg="dark" variant="dark">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
