@@ -7,10 +7,11 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
+import Select from 'react-select';
 
 import Asset from "../../components/Asset";
 
-/*import Upload from "../../assets/upload.png";*/
+
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
@@ -19,6 +20,9 @@ import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 
+// const { id } = useParams();
+// conts isEditing = !!id;
+
 function PostCreateForm() {
   const [errors, setErrors] = useState({});
 
@@ -26,7 +30,7 @@ function PostCreateForm() {
     title: "",
     content: "",
     image: "",
-    category: "", 
+    category: "",
   });
   const { title, content, image, category } = postData;
 
@@ -57,7 +61,8 @@ function PostCreateForm() {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
-    formData.append("category", category[0]);
+    formData.append("category", category);
+
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -70,7 +75,7 @@ function PostCreateForm() {
     }
   };
 
-  const textFields = (
+  const formFields = (
     <div className="text-center">
       <Form.Group>
         <Form.Label>Title</Form.Label>
@@ -86,6 +91,22 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
+      <Form.Group controlId="category">
+        <Form.Label>Category</Form.Label>
+        <Form.Control
+          type="select"
+          name="category"
+          value={category}
+          onChange={handleChange}
+          >
+        
+          <option value="horse">Horse</option>
+          <option value="horse">Horse</option>
+          <option value="horse">Horse</option>
+          <option value="horse">Horse</option>
+        </Form.Control>
+      </Form.Group>
+      
 
       <Form.Group>
         <Form.Label>Content</Form.Label>
@@ -102,17 +123,6 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
-
-      <Form.Select aria-label="Default select example">
-        <Form.Control
-          as="textarea"
-          rows={6}
-          name="category"
-          value={category}
-          onChange={handleChange}
-        />
-        
-      </Form.Select>
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -154,7 +164,7 @@ function PostCreateForm() {
                   htmlFor="image-upload"
                 >
                   <Asset
-                    src={Upload}
+                    // src={Upload}
                     message="Click or tap to upload an image"
                   />
                 </Form.Label>
@@ -173,11 +183,11 @@ function PostCreateForm() {
               </Alert>
             ))}
 
-            <div className="d-md-none">{textFields}</div>
+            <div className="d-md-none">{formFields}</div>
           </Container>
         </Col>
         <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
+          <Container className={appStyles.Content}>{formFields}</Container>
         </Col>
       </Row>
     </Form>
