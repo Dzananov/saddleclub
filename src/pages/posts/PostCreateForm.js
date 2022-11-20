@@ -10,7 +10,7 @@ import Image from "react-bootstrap/Image";
 
 import Asset from "../../components/Asset";
 
-import Upload from "../../assets/upload.png";
+/*import Upload from "../../assets/upload.png";*/
 
 import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
@@ -26,8 +26,9 @@ function PostCreateForm() {
     title: "",
     content: "",
     image: "",
+    category: "", 
   });
-  const { title, content, image } = postData;
+  const { title, content, image, category } = postData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -56,6 +57,7 @@ function PostCreateForm() {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", imageInput.current.files[0]);
+    formData.append("category", category[0]);
 
     try {
       const { data } = await axiosReq.post("/posts/", formData);
@@ -100,6 +102,17 @@ function PostCreateForm() {
           {message}
         </Alert>
       ))}
+
+      <Form.Select aria-label="Default select example">
+        <Form.Control
+          as="textarea"
+          rows={6}
+          name="category"
+          value={category}
+          onChange={handleChange}
+        />
+        
+      </Form.Select>
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
