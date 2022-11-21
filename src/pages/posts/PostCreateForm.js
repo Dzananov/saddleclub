@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
 import Image from "react-bootstrap/Image";
-import Select from 'react-select';
+
 
 import Asset from "../../components/Asset";
 
@@ -100,10 +100,12 @@ function PostCreateForm() {
           onChange={handleChange}
           >
         
+          <option value="gear">Gear</option>
+          <option value="rider">Rider</option>
+          <option value="food">Horse Food</option>
+          <option value="exercise">Exercizes</option>
           <option value="horse">Horse</option>
-          <option value="horse">Horse</option>
-          <option value="horse">Horse</option>
-          <option value="horse">Horse</option>
+          <option value="selfcare">Selfcare</option>
         </select>
       </Form.Group>
       
