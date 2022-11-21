@@ -65,8 +65,8 @@ function PostCreateForm() {
 
 
     try {
-      const { data } = await axiosReq.post("/posts/", formData);
-      history.push(`/posts/${data.id}`);
+      const { data } = await axiosReq.post("/post/", formData);
+      history.push(`/post/${data.id}`);
     } catch (err) {
       console.log(err);
       if (err.response?.status !== 401) {
@@ -93,7 +93,7 @@ function PostCreateForm() {
       ))}
       <Form.Group controlId="category">
         <Form.Label>Category</Form.Label>
-        <Form.Control
+        <select
           type="select"
           name="category"
           value={category}
@@ -104,7 +104,7 @@ function PostCreateForm() {
           <option value="horse">Horse</option>
           <option value="horse">Horse</option>
           <option value="horse">Horse</option>
-        </Form.Control>
+        </select>
       </Form.Group>
       
 
