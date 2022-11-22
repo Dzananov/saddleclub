@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/Saddleicon.jpg";
 import styles from "../styles/NavBar.module.css";
 import { NavLink } from "react-router-dom";
 import {
@@ -10,6 +10,7 @@ import {
 import Avatar from "./Avatar";
 import axios from "axios";
 import useClickOutsideToggle from "../hooks/useClickOutsideToggle";
+
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -30,7 +31,7 @@ const NavBar = () => {
     <NavLink
       className={styles.NavLink}
       activeClassName={styles.Active}
-      to="/posts/create"
+      to="/post/create"
     >
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
