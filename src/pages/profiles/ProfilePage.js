@@ -3,38 +3,24 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
 import Asset from "../../components/Asset";
-
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
-// import {
-//   useProfileData,
-//   useSetProfileData,
-// } from "../../contexts/ProfileDataContext";
 import { useParams } from "react-router";
 import { Button, Image } from "react-bootstrap";
 import Profile from "./Profile";
+
+
 function ProfilePage() {
-// const [hasLoaded, setHasLoaded] = useState(false);
-  // const currentUser = useCurrentUser();
-  // const { id } = useParams();
-  // const setProfileData = useSetProfileData();
-
   const { id } = useParams();
-  const [profile, setProfile, hasLoaded] = useState({ results: [] });
- 
-
+  const [profile, setProfile] = useState( {} );
   const currentUser = useCurrentUser();
-  // const profile_image = currentUser?.profile_image;
-  // const [comments, setComments] = useState({ results: [] });
   const is_owner = currentUser?.username === profile?.owner;
-  
+  const [hasLoaded, setHasLoaded] = useState (false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,8 +28,8 @@ function ProfilePage() {
           axiosReq.get(`/profiles/${id}`),
           
         ]);
-        setProfile({ results: [profile] });
-        
+        setProfile(profile);
+        setHasLoaded(true);
         console.log(profile);
       } catch (err) {
         console.log(err);
@@ -52,24 +38,6 @@ function ProfilePage() {
 
     fetchData();
   }, [id, setProfile]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const [{ data: pageProfile }] = await Promise.all([
-  //         axiosReq.get(`/profiles/${id}/`),
-  //       ]);
-  //       setProfileData((prevState) => ({
-  //         ...prevState,
-  //         pageProfile: { results: [pageProfile] },
-  //       }));
-  //       setHasLoaded(true);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [id]);
 
   const mainProfile = (
     <>
