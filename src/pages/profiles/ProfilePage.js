@@ -12,34 +12,122 @@ import btnStyles from "../../styles/Button.module.css";
 
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
+import { axiosReq } from "../../api/axiosDefaults";
+// import {
+//   useProfileData,
+//   useSetProfileData,
+// } from "../../contexts/ProfileDataContext";
+import { useParams } from "react-router";
+import { Button, Image } from "react-bootstrap";
+import Profile from "./Profile";
 function ProfilePage() {
-  const [hasLoaded, setHasLoaded] = useState(false);
-  const currentUser = useCurrentUser();
+// const [hasLoaded, setHasLoaded] = useState(false);
+  // const currentUser = useCurrentUser();
+  // const { id } = useParams();
+  // const setProfileData = useSetProfileData();
 
+  const { id } = useParams();
+  const [profile, setProfile, hasLoaded] = useState({ results: [] });
+ 
+
+  const currentUser = useCurrentUser();
+  // const profile_image = currentUser?.profile_image;
+  // const [comments, setComments] = useState({ results: [] });
+  const is_owner = currentUser?.username === profile?.owner;
+  
   useEffect(() => {
-      setHasLoaded(true);
-  }, [])
+    const fetchData = async () => {
+      try {
+        const [{ data: profile }] = await Promise.all([
+          axiosReq.get(`/profiles/${id}`),
+          
+        ]);
+        setProfile({ results: [profile] });
+        
+        console.log(profile);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, [id, setProfile]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [{ data: pageProfile }] = await Promise.all([
+  //         axiosReq.get(`/profiles/${id}/`),
+  //       ]);
+  //       setProfileData((prevState) => ({
+  //         ...prevState,
+  //         pageProfile: { results: [pageProfile] },
+  //       }));
+  //       setHasLoaded(true);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [id]);
 
   const mainProfile = (
     <>
-      <Row noGutters className="px-3 text-center">
+      <container className={appStyles.Content}>
+       <Row className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
-          <p>Image</p>
+
+          <Image
+            className={styles.ProfileImage}
+            roundedCircle
+            src={profile?.image}
+          />
         </Col>
         <Col lg={6}>
-          <h3 className="m-2">Profile username</h3>
-          <p>Profile stats</p>
+          <h3 className="m-2">{profile?.owner}</h3>
+          
+          <Row className="justify-content-center no-gutters">
+            <Col xs={3} className="my-2">
+              <div>{profile?.posts_count}</div>
+              <div>posts</div>
+            </Col>
+            <Col xs={3} className="my-2">
+              <div>{profile?.followers_count}</div>
+              <div>followers</div>
+            </Col>
+            <Col xs={3} className="my-2">
+              <div>{profile?.following_count}</div>
+              <div>following</div>
+            </Col>
+          </Row>
         </Col>
-        <Col lg={3} className="text-lg-right">
-        <p>Follow button</p>
-        </Col>
-        <Col className="p-3">Profile content</Col>
-      </Row>
+        {<Col lg={3} className="text-lg-right">
+          {currentUser &&
+            !is_owner &&
+            (profile?.following_id ? (
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.BlackOutline}`}
+                onClick={() => {}}
+              >
+                unfollow
+              </Button>
+            ) : (
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.Black}`}
+                onClick={() => {}}
+              >
+                follow
+              </Button>
+            ))}
+        </Col> }
+        {profile?.content && <Col className="p-3">{profile.content}</Col>}
+       </Row>
+      </container>
+      
+    
     </>
   );
-
-  const mainProfilePost = (
+  const mainProfilePosts = (
     <>
       <hr />
       <p className="text-center">Profile owner's posts</p>
@@ -47,26 +135,26 @@ function ProfilePage() {
     </>
   );
 
-  return (
-    <Row>
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <PopularProfiles mobile />
-        <Container className={appStyles.Content}>
-          {hasLoaded ? (
-            <>
-              {mainProfile}
-              {mainProfilePost}
-            </>
-          ) : (
-            <Asset spinner />
-          )}
-        </Container>
-      </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        <PopularProfiles />
-      </Col>
-    </Row>
-  );
+   return (
+     <Row>
+       <Col className="py-2 p-0 p-lg-2" lg={8}>
+         <PopularProfiles mobile />
+         <Container className={appStyles.Content}>
+           {hasLoaded ? (
+             <>
+               {mainProfile}
+               {mainProfilePosts}
+             </>
+           ) : (
+             <Asset spinner />
+           )}
+         </Container>
+       </Col>
+       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+         <PopularProfiles />
+       </Col>
+     </Row>
+   );
 }
 
 export default ProfilePage;

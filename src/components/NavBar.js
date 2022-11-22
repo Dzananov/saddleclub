@@ -36,6 +36,17 @@ const NavBar = () => {
       <i className="far fa-plus-square"></i>Add post
     </NavLink>
   );
+
+  const profile = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to={`/profiles/${currentUser?.profile_id}`}
+    >
+      <i className="far fa-plus-square"></i>Profile
+    </NavLink>
+  );
+
   const loggedInIcons = (
     <>
       <NavLink
@@ -96,6 +107,7 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
+        {profile}
         <Navbar.Toggle
           ref={ref}
           onClick={() => setExpanded(!expanded)}
