@@ -5,7 +5,7 @@ import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-const PopularProfiles = ( mobile) => {
+const PopularProfiles = ( {mobile} ) => {
     const [profileData, setProfileData] = useState({
       // we will use the pageProfile later!
       pageProfile: { results: [] },
@@ -18,7 +18,7 @@ const PopularProfiles = ( mobile) => {
       const handleMount = async () => {
         try {
           const { data } = await axiosReq.get(
-            "/profiles/?ordering=-followers_count"
+            "/profiles/?ordering=-created_at"
           );
           setProfileData((prevState) => ({
             ...prevState,
@@ -40,10 +40,10 @@ const PopularProfiles = ( mobile) => {
     >
       {popularProfiles.results.length ? (
         <>
-          <p>Most followed profiles.</p>
+          <p>Newest members</p>
           {mobile ? (
             <div className="d-flex justify-content-around">
-              {popularProfiles.results.slice(0, 6).map((profile) => (
+              {popularProfiles.results.slice(0, 3).map((profile) => (
                 <p key={profile.id}>{profile.owner}</p>
               ))}
             </div>
