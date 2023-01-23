@@ -37,15 +37,15 @@ const NavBar = () => {
     </NavLink>
   );
 
-  const profile = (
-    <NavLink
-      className={styles.NavLink}
-      activeClassName={styles.Active}
-      to={`/profiles/${currentUser?.profile_id}`}
-    >
-      <i className="fa fa-user-o"></i>Profile
-    </NavLink>
-  );
+  // const profile = (
+  //   <NavLink
+  //     className={styles.NavLink}
+  //     activeClassName={styles.Active}
+  //     to={`/profiles/${currentUser?.profile_id}`}
+  //   >
+  //     <i className="fa fa-user-o"></i>Profile
+  //   </NavLink>
+  // );
 
   const loggedInIcons = (
     <>
@@ -55,6 +55,14 @@ const NavBar = () => {
         to="/feed"
       >
         <i className="fas fa-stream"></i>Feed
+      </NavLink>
+
+      <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to={`/profiles/${currentUser?.profile_id}`}
+    >
+      <i className="fa fa-user-o"></i>Profile
       </NavLink>
     
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
@@ -96,7 +104,7 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addPostIcon}
-        {profile}
+        
         <Navbar.Toggle
           ref={ref}
           onClick={() => setExpanded(!expanded)}
