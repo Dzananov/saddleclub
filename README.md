@@ -35,7 +35,21 @@ As a user I can delete my post so that I dont have that post anymore
 As a loged in site visiter I can add and delet comments 
 
 
+## Plan
 
+For this project there is a kaanban. The kaanban tasks have all been labeld and have a milestone goal. In this section the labels meaning will be explained aswell as the milestones.
+
+Labels:
+ * Must have:This taska are labeld must haves for the app to be able to work as a functional CRUD app. So the user can create, read, edit and delete something.
+ * Should haves: Tasks labled should haves are for those tasks that should be included for the app to be interactive. So the user can interact with others
+ * Want to have: Feauters that will make the app more exclusive but is not neccessery for the app to work.
+
+Milestones: 
+* CRUD: A milestone that is required for the app to be able to procceed school project requirements.
+* Interactive functions: A milestone that is required for the app to be able to procceed school project requirements.
+* Base functions: A milestone that is required for the app to be able to procceed school project requirements but also for the app to be able to run.
+* CRUD 2 prio: CRUD functions that is wanted for the app to be more exclusive.
+* Interactive functions: Functions that is wanted for the app to be more interactive.
 
 
 # Design
@@ -68,11 +82,9 @@ Some of the fetures below
 
 ## Future Features
 
-* Add a rate app. As a User I want to be able to rate a post from 1-5.
-as a post owner I want to be able to se when and who rates my post.
-* Add a function and connection to api for likes(in the navbar aswell as on the post) 
+* Add a like function 
+* Add a edit comment function
 * add function to "followers" on the profiles pages aswell as the sidebar with the "Populare Profiles"
-* Going to add a searchbar to search posts by categories. The searc results will then be shown on the "Feeds"
 * As a user I want to be able to edit and delete my profile
 
 
@@ -103,14 +115,14 @@ as a post owner I want to be able to se when and who rates my post.
 
 
 * Libraries
-  * Allauth
-  * React-bootstrap
+  * Allauth - For login/log out and sign up forms
+  * React-bootstrap - For the overall frontend design
 
 * Programs
-  * GitPod:
+ 
   * Gitpod was used as IDE to commit and push the project to GitHub.
-  * GitHub:
-  * Was used for all storing and backup of the code pertaining to the project.
+  * GitHub: To store my repositary
+
 
 ## Testing
 I did testing on my webpage troughout the project: Testings performed:
@@ -140,9 +152,7 @@ I did testing on my webpage troughout the project: Testings performed:
 |Did not connect to backend api| My CLIET_ORIGI_DEV had the wrong URL Link. When I tried to show my profiles on the  saddleclubbackend heroku app i got an erros. Console log a error in the connection between frontend and api.| fixed |
 
 ## Unfixed Bugs
-* Due to trouble installing the jwt-decode I could not remove my 404 errors logging on the consul. I did not have time to fix this issus.
-* Cloudinary default image is not loading as supposed from the backend.
-* In the last minutes before my due time a error occuerd. A 500 error showing an internal error. either me or my tutor knew where the error came from. I had not been changing anything neither frontend or the backend before the error occuerd. I updated config vars and traced my steps back but nothing.
+* o unfixed bugs
 
 ## Desktop
 The app is responsive and tested on both mobileview and desktop view.
@@ -154,11 +164,6 @@ The app is responsive and tested on both mobileview and desktop view.
   * Logged in to my account on herouku
   * At dashboard I created a new app called "saddleclub" and chose region Europe
   * In Resources I searched for PostGres in the add-ons to use as my database
-  * Connected the fronend to my backend by adding the preview url to api "Saddleclubbackend" config vars
-  * I referenced this in settings.py
-  * I added the value of 8000 and key to config vars
-  * I connected cloudinary to env.py and my herouku with the same value and key
-  * Added Allowed Hosts in settings
   * Went to the deploytab in herouku
   * searched for my github repo(my github was already connected)
   * Then clicked on deploy branch 
@@ -175,7 +180,7 @@ The app is responsive and tested on both mobileview and desktop view.
 # Credits
 
 
-* 
+
   * Code institutes walktrough project "Moment" 
   * Code institut for all CSS Files with miner changes in the textcoloring. Code institution for ProfileCreatForm and for sign in and sign out aswell as sign up. And for the context folder. Dropdown menu code from Code Institution
   * React and Javascript

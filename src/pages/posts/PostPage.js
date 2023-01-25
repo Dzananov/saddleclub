@@ -47,7 +47,7 @@ function PostPage() {
           {currentUser ? (
             <CommentCreateForm
               profile_id={currentUser.profile_id}
-              profileImage={profile_image}
+              
               post={id}
               setPost={setPost}
               setComments={setComments}
